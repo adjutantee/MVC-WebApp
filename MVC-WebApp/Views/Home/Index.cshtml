@@ -1,0 +1,22 @@
+﻿@using OnlineWebApp_MVC.Models
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@foreach (var product in Model)
+{
+    <article class="card">
+        <img src="http://placehold.it/360x340" alt="" class="card__img">
+        <h2 class="card__name">@product.Name</h2>
+        <p class="card__price">@product.Cost <span class="card__currency">руб.</span></p>
+        <button class="card__btn">В корзину</button>
+    </article>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
