@@ -16,7 +16,7 @@ namespace OnlineWebApp_MVC.Services
                 "Nike", "Force", 42-44, 19000),
         };
 
-        public List<Product> GetAll()
+        public List<Product> GetAllProduct()
         {
             return products;
         }

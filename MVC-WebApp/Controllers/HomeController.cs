@@ -17,7 +17,7 @@ namespace OnlineWebApp_MVC.Controllers
 
         public IActionResult Index()
         {
-            var products = productRepository.GetAll();
+            var products = productRepository.GetAllProduct();
             return View(products);
         }
 
