@@ -2,22 +2,15 @@
 @model Product
 
 <div class="row">
-    <div class="col-lg-3 col-sm-3 col-xs-12" style="height: 100px; line-height: 100px;">
-        <img src="ссылка на фото" style="width: 80px; height: 80px;  " />
+    <div class="col-6">
+        <img class="card-img-top" src="/css/PHTTest.png" alt="Изображение товара" />
     </div>
-    <div class="col-lg-3 col-sm-3 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;">
-        @Model.Name
-    </div>
-    <div class="col-lg-2 col-sm-2 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;">
-        @Model.Cost
-    </div>
-    <div class="col-lg-1 col-sm-2 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;">
-        @Model.Size
-    </div>
-    <div class="col-lg-3 col-sm-2 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;">
-        Продолжить покупки
-    </div>
-    <div class="col-lg-3 col-sm-2 col-xs-12 mob-fix" style="height: 100px; line-height: 100px;">
-        Удалить
+
+    <div class="col-6">
+        <h5>@Model.Name</h5></a>
+        <h5>@Model.Cost руб</h5>
+        <h5>@Model.Description</h5>
+        <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+        <a class="btn btn-dark" href="#" role="button">Добавить в корзину</a>
     </div>
 </div>

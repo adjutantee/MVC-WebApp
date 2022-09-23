@@ -4,7 +4,7 @@ namespace OnlineWebApp_MVC.Models
 {
     public class Product
     {
-        private int instanceCounter = 1;
+        private static int instanceCounter = 1;
         public int Id { get; }
         public string Name { get; }
         public string Description { get; }
