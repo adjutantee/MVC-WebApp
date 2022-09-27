@@ -19,10 +19,11 @@ namespace MVC_WebApp.Controllers
             return View(cart);
         }
 
-        public IActionResult Index(int productId)
+        public IActionResult Add(int productId)
         {
             var product = productRepository.TryGetById(productId);
-            return View(product);
+            CartsRepository.Add(product, Constants.UserId);
+            return RedirectToAction("Index");
         }
     }
 }
