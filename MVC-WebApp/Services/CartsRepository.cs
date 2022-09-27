@@ -39,12 +39,12 @@ namespace MVC_WebApp.Services
             }
             else
             {
-                var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
-                if (existingCartItem != null)
+                var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id); // Проверяет есть ли позиция с таким же продуктом
+                if (existingCartItem != null) // Если есть, добавляем +1
                 {
                     existingCartItem.Amount += 1;
                 }
-                else
+                else // Если нет, создаем новую позицию
                 {
                     existingCart.Items.Add(new CartItem
                         {
