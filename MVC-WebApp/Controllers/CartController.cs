@@ -6,10 +6,10 @@ namespace MVC_WebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductRepository productRepository;
-        private readonly CartsRepository cartsRepository;
+        private readonly IProductRepository productRepository;
+        private readonly ICartsRepository cartsRepository;
 
-        public CartController(ProductRepository productRepository, CartsRepository cartsRepository)
+        public CartController(IProductRepository productRepository, ICartsRepository cartsRepository)
         {
             this.productRepository = productRepository;
             this.cartsRepository = cartsRepository;

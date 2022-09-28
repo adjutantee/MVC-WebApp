@@ -4,7 +4,7 @@ using OnlineWebApp_MVC.Models;
 
 namespace OnlineWebApp_MVC.Services
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private List<Product> products = new List<Product>()
         {

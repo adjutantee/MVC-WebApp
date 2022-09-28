@@ -21,8 +21,8 @@ namespace MVC_WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<ProductRepository>();
-            services.AddSingleton<CartsRepository>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<ICartsRepository, CartsRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
