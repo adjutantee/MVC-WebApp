@@ -6,7 +6,7 @@ namespace OnlineWebApp_MVC.Services
 {
     public class ProductRepository
     {
-        private static List<Product> products = new List<Product>()
+        private List<Product> products = new List<Product>()
         {
             new Product("Name1", "Кроссовки фирмы Nike",
                 "Nike", "Force", 39-41, 15000),
