@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC_WebApp.Services;
+using OnlineWebApp_MVC.Services;
 
 namespace MVC_WebApp
 {
@@ -19,6 +21,8 @@ namespace MVC_WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<ProductRepository>();
+            services.AddSingleton<CartsRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

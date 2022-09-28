@@ -7,9 +7,9 @@ namespace MVC_WebApp.Controllers
     {
         private readonly ProductRepository productRepository;
 
-        public ProductController()
+        public ProductController(ProductRepository productRepository)
         {
-            productRepository = new ProductRepository();
+            this.productRepository = productRepository;
         }
 
         public IActionResult Index(int id)
