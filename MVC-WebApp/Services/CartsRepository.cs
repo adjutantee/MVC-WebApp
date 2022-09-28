@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MVC_WebApp.Services
 {
-    public class CartsRepository
+    public class CartsRepository : ICartsRepository
     {
         private List<Cart> carts = new List<Cart>();
 
@@ -47,7 +47,7 @@ namespace MVC_WebApp.Services
                 else // Если нет, создаем новую позицию
                 {
                     existingCart.Items.Add(new CartItem
-                        {
+                    {
                         Id = Guid.NewGuid(),
                         Amount = 1,
                         Product = product

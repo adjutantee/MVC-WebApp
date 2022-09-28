@@ -8,9 +8,9 @@ namespace OnlineWebApp_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductRepository productRepository;
+        private readonly IProductRepository productRepository;
 
-        public HomeController(ProductRepository productRepository)
+        public HomeController(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
         }
