@@ -19,7 +19,7 @@ namespace MVC_WebApp.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public IActionResult Buy(Order order)
         {
