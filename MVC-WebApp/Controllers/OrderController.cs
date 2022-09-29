@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_WebApp.Models;
 using MVC_WebApp.Services;
 
 namespace MVC_WebApp.Controllers
@@ -20,7 +21,7 @@ namespace MVC_WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(string name, string email, string numberPhome, string message)
+        public IActionResult Buy(Order order)
         {
             var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
             ordersRepository.Add(existingCart);
