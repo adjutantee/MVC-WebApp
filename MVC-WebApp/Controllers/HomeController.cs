@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.Models;
+using MVC_WebApp.Services;
 using OnlineWebApp_MVC.Models;
 using OnlineWebApp_MVC.Services;
 using System.Diagnostics;
@@ -9,14 +10,18 @@ namespace OnlineWebApp_MVC.Controllers
     public class HomeController : Controller
     {
         private readonly IProductRepository productRepository;
+        private readonly ICartsRepository cartsRepository;
 
-        public HomeController(IProductRepository productRepository)
+        public HomeController(IProductRepository productRepository, ICartsRepository cartsRepository)
         {
             this.productRepository = productRepository;
+            this.cartsRepository = cartsRepository;
         }
 
         public IActionResult Index()
         {
+            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
+            ViewBag.ProductCount = cart?.Amount;
             var products = productRepository.GetAllProduct();
             return View(products);
         }
