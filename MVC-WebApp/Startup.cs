@@ -23,6 +23,7 @@ namespace MVC_WebApp
             services.AddControllersWithViews();
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<ICartsRepository, CartsRepository>();
+            services.AddSingleton<IOrdersRepository, OrdersRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
