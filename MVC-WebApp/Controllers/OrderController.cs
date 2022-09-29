@@ -19,7 +19,8 @@ namespace MVC_WebApp.Controllers
             return View();
         }
 
-        public IActionResult Buy()
+        [HttpPost]
+        public IActionResult Buy(string name, string email, string numberPhome, string message)
         {
             var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
             ordersRepository.Add(existingCart);
