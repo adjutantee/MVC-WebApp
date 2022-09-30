@@ -4,6 +4,6 @@ namespace MVC_WebApp.Services
 {
     public interface IOrdersRepository
     {
-        void Add(Cart cart);
+        void Add(Order order);
     }
 }

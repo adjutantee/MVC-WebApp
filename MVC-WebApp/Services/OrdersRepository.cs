@@ -8,11 +8,11 @@ namespace MVC_WebApp.Services
 {
     public class OrdersRepository : IOrdersRepository
     {
-        private List<Cart> orders = new List<Cart>();
+        private List<Order> orders = new List<Order>();
 
-        public void Add(Cart cart)
+        public void Add(Order order)
         {
-            orders.Add(cart);
+            orders.Add(order);
         }
     }
 }
