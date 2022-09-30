@@ -5,27 +5,34 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .resultSearch {
+        margin-top: 10px;
+    }
+</style>
+
 <form method="post">
-    <div class="col">
-        <input type="text" class="form-control" name="name" placeholder="Поиск товара">
-        <br />
-        <button class="btn-primary" type="submit" asp-controller="Home" asp-action="ProductSearch">Искать</button>
+    <div class="input-group">
+        <input type="text" class="form-control rounded" name="name" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="submit" class="btn btn-outline-primary" asp-controller="Home" asp-action="ProductSearch">Поиск</button>
     </div>
 </form>
 
-<div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col 3 card shadow">
-            <img width="300" height="200" src="/css/PHTTest.png" alt="">
+<div class="resultSearch">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col 3 card shadow">
+                <img width="300" height="200" src="/css/PHTTest.png" alt="">
 
-            <div class="card-body">
-                <a style="color:black" href="/product/index/@product.Id">
-                    <h2>@product.Name</h2>
-                </a>
-                <h5>@product.Cost руб</h5>
-                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                <div class="card-body">
+                    <a style="color:black" href="/product/index/@product.Id">
+                        <h2>@product.Name</h2>
+                    </a>
+                    <h5>@product.Cost руб</h5>
+                    <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
