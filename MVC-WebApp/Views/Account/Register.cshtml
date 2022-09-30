@@ -1,0 +1,45 @@
+﻿<style>
+    .loginForm {
+        margin: auto;
+        width: 50%;
+        margin-top: 20%;
+    }
+
+    .form-check-input {
+        margin-left: 10px;
+    }
+
+    .form-check {
+        padding: 0;
+    }
+</style>
+
+<form method="post">
+    <div class="text-center loginForm">
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label>Электронный адрес</label>
+            <input type="email" name="exampleLoginEmail" class="form-control" />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label>Пароль</label>
+            <input type="password" name="exampleLoginPassword" class="form-control" />
+
+        </div>
+
+        <div class="form-outline mb-4">
+            <label>Пароль</label>
+            <input type="password" name="exampleReTypeLoginPassword" class="form-control" />
+
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4" asp-controller="Account" asp-action="Register">Создать аккаунт</button>
+
+        <!-- Register buttons -->
+        <div class="text-center">
+            <p>Уже есть аккаунт? <a asp-controller="Account" asp-action="Login">Войти</a></p>
+        </div>
+</form>
