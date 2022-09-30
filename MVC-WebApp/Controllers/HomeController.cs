@@ -26,6 +26,20 @@ namespace OnlineWebApp_MVC.Controllers
             return View(products);
         }
 
+        [HttpPost]
+        public IActionResult ProductSearch(string name)
+        {
+            if (name != null)
+            {
+                var productSearch = productRepository.GetAllProduct().FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
+                return View(productSearch);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
         public IActionResult Privacy()
         {
             return View();
