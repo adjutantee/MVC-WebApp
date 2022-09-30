@@ -2,9 +2,9 @@
 {
     public class UserDeliveryInfo
     {
-        public string name { get; set; }
-        public string email { get; set; }
-        public string numberPhome { get; set; }
-        public string message { get; set; }
+        public string userOrderName { get; set; }
+        public string userOrderEmail { get; set; }
+        public string userOrderPhome { get; set; }
+        public string userOrderMessage { get; set; }
     }
 }
