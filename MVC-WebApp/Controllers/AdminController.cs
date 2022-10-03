@@ -1,9 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineWebApp_MVC.Services;
 
 namespace MVC_WebApp.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IProductRepository productRepository;
+
+        public AdminController(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
+
         public IActionResult Orders()
         {
             return View();
@@ -21,7 +29,12 @@ namespace MVC_WebApp.Controllers
 
         public IActionResult Products()
         {
-            return View();
+            var products = productRepository.GetAllProduct();
+            if (products == null || products.Count == 0)
+            {
+                return View("notFound");
+            }
+            return View(products);
         }
     }
 }
