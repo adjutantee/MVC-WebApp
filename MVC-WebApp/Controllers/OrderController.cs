@@ -23,14 +23,18 @@ namespace MVC_WebApp.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo user)
         {
-            var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
-            var order = new Order()
+            if (ModelState.IsValid)
             {
-                User = user,
-                Items = existingCart.Items
-            };
-            ordersRepository.Add(order);
-            cartsRepository.Clear(Constants.UserId);
+                var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
+                var order = new Order()
+                {
+                    User = user,
+                    Items = existingCart.Items
+                };
+                ordersRepository.Add(order);
+                cartsRepository.Clear(Constants.UserId);
+                return View();
+            }
             return View();
         }
     }

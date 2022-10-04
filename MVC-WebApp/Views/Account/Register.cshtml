@@ -1,4 +1,6 @@
-﻿<style>
+﻿@model Register
+
+<style>
     .loginForm {
         margin: auto;
         width: 50%;
@@ -18,21 +20,22 @@
     <div class="text-center loginForm">
         <!-- Email input -->
         <div class="form-outline mb-4">
-            <label>Электронный адрес</label>
-            <input type="email" name="exampleLoginEmail" class="form-control" />
+            <label asp-for="exampleLoginEmail">Электронный адрес</label>
+            <input type="email" asp-for="exampleLoginEmail" class="form-control" />
+            <span asp-validation-for="exampleLoginEmail"></span>
         </div>
 
         <!-- Password input -->
         <div class="form-outline mb-4">
-            <label>Пароль</label>
-            <input type="password" name="exampleLoginPassword" class="form-control" />
-
+            <label asp-for="exampleLoginPassword">Пароль</label>
+            <input type="password" asp-for="exampleLoginPassword" class="form-control" />
+            <span asp-validation-for="exampleLoginPassword"></span>
         </div>
 
         <div class="form-outline mb-4">
-            <label>Пароль</label>
-            <input type="password" name="exampleReTypeLoginPassword" class="form-control" />
-
+            <label asp-for="exampleReTypeLoginPassword">Пароль</label>
+            <input type="password" asp-for="exampleReTypeLoginPassword" class="form-control" />
+            <span asp-validation-for="exampleReTypeLoginPassword"></span>
         </div>
 
         <!-- Submit button -->
@@ -43,3 +46,9 @@
             <p>Уже есть аккаунт? <a asp-controller="Account" asp-action="Login">Войти</a></p>
         </div>
 </form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

@@ -1,25 +1,30 @@
-﻿<form method="post">
+﻿@model UserDeliveryInfo
+
+<form method="post">
     <div class="row">
         <div class="col-md-9 mb-md-0 mb-5">
             <div class="row">
                 <div class="col-md-6">
                     <div class="md-form mb-0">
-                        <label>Ваше ФИО</label>
-                        <input type="text" name="userOrderName" class="form-control">
+                        <label asp-for="userOrderName">Ваше ФИО</label>
+                        <input type="text" asp-for="userOrderName" class="form-control">
+                        <span asp-validation-for="userOrderName"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="md-form mb-0">
-                        <label>Электронный адрес</label>
-                        <input type="email" name="userOrderEmail" class="form-control">
+                        <label asp-for="userOrderEmail">Электронный адрес</label>
+                        <input type="email" asp-for="userOrderEmail" class="form-control">
+                        <span asp-validation-for="userOrderEmail"></span>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="md-form mb-0">
-                        <label>Номер телефона</label>
-                        <input type="text" name="userOrderPhome" class="form-control">
+                        <label asp-for="userOrderPhome">Номер телефона</label>
+                        <input type="text" asp-for="userOrderPhome" class="form-control">
+                        <span asp-validation-for="userOrderPhome"></span>
                     </div>
                 </div>
             </div>
@@ -38,3 +43,9 @@
         </div>
     </div>
 </form>
+
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

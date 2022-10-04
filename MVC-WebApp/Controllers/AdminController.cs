@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineWebApp_MVC.Models;
 using OnlineWebApp_MVC.Services;
 
 namespace MVC_WebApp.Controllers
@@ -35,6 +36,18 @@ namespace MVC_WebApp.Controllers
                 return View("notFound");
             }
             return View(products);
+        }
+
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Product product)
+        {
+            productRepository.Add(product);
+            return View();
         }
     }
 }
