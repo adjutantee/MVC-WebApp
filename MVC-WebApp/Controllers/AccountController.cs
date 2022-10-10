@@ -13,9 +13,12 @@ namespace MVC_WebApp.Controllers
         [HttpPost]
         public IActionResult Login(Login login)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Login");
         }
-
 
         public IActionResult Register()
         {
@@ -25,7 +28,11 @@ namespace MVC_WebApp.Controllers
         [HttpPost]
         public IActionResult Register(Register register)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Register");
         }
 
     }

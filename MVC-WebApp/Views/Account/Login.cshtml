@@ -18,21 +18,18 @@
 
 <form method="post">
     <div class="text-center loginForm">
-        <!-- Email input -->
         <div class="form-outline mb-4">
             <label asp-for="exampleLoginEmail">Электронный адрес</label>
             <input type="email" asp-for="exampleLoginEmail" class="form-control" />
             <span asp-validation-for="exampleLoginEmail"></span>
         </div>
 
-        <!-- Password input -->
         <div class="form-outline mb-4">
             <label asp-for="exampleLoginPassword">Пароль</label>
             <input type="password" asp-for="exampleLoginPassword" class="form-control" />
             <span asp-validation-for="exampleLoginPassword"></span>
         </div>
 
-        <!-- 2 column grid layout for inline styling -->
         <div class="row mb-4">
             <div class="col d-flex justify-content-center">
                 <!-- Checkbox -->
@@ -44,16 +41,14 @@
             </div>
 
             <div class="col">
-                <!-- Simple link -->
                 <a href="#!">Забыли пароль?</a>
             </div>
         </div>
 
-        <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4" asp-controller="Account" asp-action="Login">Войти</button>
 
-        <!-- Register buttons -->
         <div class="text-center">
             <p>Нет аккаунта? <a asp-controller="Account" asp-action="Register">Регистрация</a></p>
         </div>
+    </div>
 </form>
