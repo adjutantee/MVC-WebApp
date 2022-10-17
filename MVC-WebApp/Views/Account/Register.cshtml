@@ -17,15 +17,16 @@
 </style>
 
 <form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+
     <div class="text-center loginForm">
-        <!-- Email input -->
         <div class="form-outline mb-4">
             <label asp-for="exampleLoginEmail">Электронный адрес</label>
             <input type="email" asp-for="exampleLoginEmail" class="form-control" />
             <span asp-validation-for="exampleLoginEmail"></span>
         </div>
 
-        <!-- Password input -->
         <div class="form-outline mb-4">
             <label asp-for="exampleLoginPassword">Пароль</label>
             <input type="password" asp-for="exampleLoginPassword" class="form-control" />
@@ -38,10 +39,8 @@
             <span asp-validation-for="exampleReTypeLoginPassword"></span>
         </div>
 
-        <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4" asp-controller="Account" asp-action="Register">Создать аккаунт</button>
 
-        <!-- Register buttons -->
         <div class="text-center">
             <p>Уже есть аккаунт? <a asp-controller="Account" asp-action="Login">Войти</a></p>
         </div>

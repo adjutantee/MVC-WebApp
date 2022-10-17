@@ -23,6 +23,11 @@ namespace MVC_WebApp.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", user);
+            }
+
             if (ModelState.IsValid)
             {
                 var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);

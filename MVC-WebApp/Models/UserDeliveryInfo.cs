@@ -10,7 +10,9 @@ namespace MVC_WebApp.Models
         [EmailAddress(ErrorMessage = "Укажите правильный Email")]
         public string userOrderEmail { get; set; }
         [Required(ErrorMessage = "Не указан номер телефона")]
-        public string userOrderPhome { get; set; }
+        public string userOrderPhone { get; set; }
+        [Required(ErrorMessage = "Не указан адрес доставки")]
+        public string userAdres { get; set; }
         public string userOrderMessage { get; set; }
     }
 }

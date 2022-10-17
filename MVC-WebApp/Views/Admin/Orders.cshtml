@@ -1,8 +1,43 @@
-﻿
+﻿@using OnlineWebApp_MVC.Models
+@model List<Order>
+
+
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
 
     <div class="col-9">
         <h3>Список заказов</h3>
+
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Сумма</th>
+                            <th>Пользователь</th>
+                            <th>Статус</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.Id</td>
+                                <td>@product.Cost</td>
+                                <td>Admin</td>
+                                <td>@product.Status</td>
+                                <td>@product.CreateDateTime.ToString("d")</td>
+                                <td>@product.CreateDateTime.ToString("t")</td>
+                                <td><a href="/admin/OrderDetails?orderId=@product.Id">Подробнее</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
