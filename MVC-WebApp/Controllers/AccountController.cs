@@ -26,8 +26,8 @@ namespace MVC_WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Register register)
-        {
+        public IActionResult Register(Register register)  
+        { 
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index", "Home");

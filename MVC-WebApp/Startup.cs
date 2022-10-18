@@ -24,6 +24,7 @@ namespace MVC_WebApp
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<ICartsRepository, CartsRepository>();
             services.AddSingleton<IOrdersRepository, OrdersRepository>();
+            services.AddTransient<IRolesRepository, RolesRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

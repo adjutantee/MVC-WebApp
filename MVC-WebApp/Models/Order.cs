@@ -18,7 +18,7 @@ namespace MVC_WebApp.Models
         {
             Id = Guid.NewGuid();
             Status = OrderStatus.Created;
-            DateTime dateTime = DateTime.Now;
+            CreateDateTime = DateTime.Now;
         }
 
         public decimal Cost

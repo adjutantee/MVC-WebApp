@@ -11,28 +11,26 @@ namespace MVC_WebApp.Controllers
     {
         private readonly IProductRepository productRepository;
         private readonly IOrdersRepository ordersRepository;
+        private readonly IRolesRepository rolesRepository;
 
-        public AdminController(IProductRepository productRepository, IOrdersRepository ordersRepository)
+        public AdminController(IProductRepository productRepository, IOrdersRepository ordersRepository, IRolesRepository rolesRepository)
         {
             this.productRepository = productRepository;
             this.ordersRepository = ordersRepository;
+            this.rolesRepository = rolesRepository;
         }
 
         public IActionResult Orders()
         {
             var orders = ordersRepository.GetAll();
-            if (orders == null || orders.Count == 0)
-            {
-                return View("notFound");
-            }
             return View(orders);
         }
         public IActionResult OrderDetails(Guid orderId)
         {
-            var orders = ordersRepository.TryGetByUserId(orderId);
-            return View(orders);
+            var order = ordersRepository.TryGetByUserId(orderId);
+            return View(order);
         }
-
+        [HttpPost]
         public IActionResult OrderDetailsStatus(Guid orderId, OrderStatus status)
         {
             ordersRepository.UpdateStatus(orderId, status);
@@ -46,7 +44,34 @@ namespace MVC_WebApp.Controllers
 
         public IActionResult Roles()
         {
+            var roles = rolesRepository.GetAllRole();
+            return View(roles);
+        }
+
+        public IActionResult RemoveRole(string roleName)
+        {
+            rolesRepository.Remove(roleName);
+            return RedirectToAction("Roles");
+        }
+
+        public IActionResult AddRole()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(string name)
+        {
+            if (rolesRepository.TryGetByName(name) != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Roles");
+            }
+            return View(name);
         }
 
         public IActionResult Products()
@@ -71,7 +96,7 @@ namespace MVC_WebApp.Controllers
             {
                 return View(product);
             }
-            productRepository.Update(product);
+            productRepository.Add(product);
             return RedirectToAction("Products");
         }
 

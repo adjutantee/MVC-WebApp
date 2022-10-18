@@ -23,16 +23,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var product in Model)
+                        @for (int i = 0; i < Model.Count; i++)
                         {
                             <tr>
-                                <td>@product.Id</td>
-                                <td>@product.Cost</td>
+                                <td>@(i + 1)</td>
+                                <td>@Model[i].Cost</td>
                                 <td>Admin</td>
-                                <td>@product.Status</td>
-                                <td>@product.CreateDateTime.ToString("d")</td>
-                                <td>@product.CreateDateTime.ToString("t")</td>
-                                <td><a href="/admin/OrderDetails?orderId=@product.Id">Подробнее</a></td>
+                                <td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
+                                <td>@Model[i].CreateDateTime.ToString("d")</td>
+                                <td>@Model[i].CreateDateTime.ToString("t")</td>
+                                <td><a href="/admin/OrderDetails?orderId=@Model[i].Id">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>
