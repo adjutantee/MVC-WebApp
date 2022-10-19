@@ -3,32 +3,20 @@
 
 <form method="post">
 
-    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+    <div>
+        <h3>Создание новой роли</h3>
+    </div>
 
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+     
     <div class="row">
         <div class="col-md-6">
             <div class="md-form mb-0">
-                <label asp-for="Name">Название товара</label>
+                <label asp-for="Name">Имя роли</label>
                 <input type="text" asp-for="Name" class="form-control">
                 <span asp-validation-for="Name"></span>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="md-form mb-0">
-                <label asp-for="Description">Описание</label>
-                <input type="text" asp-for="Description" class="form-control">
-                <span asp-validation-for="Description"></span>
-            </div>
-        </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="md-form mb-0">
-                <label asp-for="Cost">Цена</label>
-                <input type="number" asp-for="Cost" class="form-control">
-                <span asp-validation-for="Cost"></span>
-            </div>
-        </div>
-    </div>
-    <button class="btn btn-primary" type="submit" asp-controller="Admin" asp-action="AddProduct" role="button">Добавить продукт</button>
+    <button class="btn btn-primary" type="submit" asp-controller="Admin" asp-action="AddRole" role="button">Добавить роль</button>
 </form>

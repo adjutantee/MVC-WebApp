@@ -22,6 +22,7 @@ namespace OnlineWebApp_MVC.Services
         {
             return roles.FirstOrDefault(x => x.Name == name);
         }
+
         public void Remove(string name)
         {
             roles.RemoveAll(x => x.Name == name);

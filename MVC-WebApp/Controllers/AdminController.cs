@@ -60,18 +60,19 @@ namespace MVC_WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRole(string name)
+        public IActionResult AddRole(Role role)
         {
-            if (rolesRepository.TryGetByName(name) != null)
+            if (rolesRepository.TryGetByName(role.Name) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует!");
             }
 
             if (ModelState.IsValid)
             {
+                rolesRepository.Add(role);
                 return RedirectToAction("Roles");
             }
-            return View(name);
+            return View(role);
         }
 
         public IActionResult Products()
