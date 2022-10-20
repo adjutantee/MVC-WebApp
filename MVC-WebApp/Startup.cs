@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVC_WebApp.Services;
 using OnlineWebApp_MVC.Services;
+using Serilog;
 
 namespace MVC_WebApp
 {
@@ -37,6 +38,9 @@ namespace MVC_WebApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSerilogRequestLogging();
+
             app.UseStaticFiles();
 
             app.UseRouting();
