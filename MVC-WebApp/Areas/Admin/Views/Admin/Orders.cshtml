@@ -1,4 +1,6 @@
-﻿@using OnlineWebApp_MVC.Models
+﻿@using MVC_WebApp.Helpers
+@using MVC_WebApp.Models
+@using OnlineWebApp_MVC.Models
 @model List<Order>
 
 
@@ -32,7 +34,7 @@
                                 <td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
                                 <td>@Model[i].CreateDateTime.ToString("d")</td>
                                 <td>@Model[i].CreateDateTime.ToString("t")</td>
-                                <td><a href="/admin/OrderDetails?orderId=@Model[i].Id">Подробнее</a></td>
+                                <td><a href="/admin/admin/OrderDetails?orderId=@Model[i].Id">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>

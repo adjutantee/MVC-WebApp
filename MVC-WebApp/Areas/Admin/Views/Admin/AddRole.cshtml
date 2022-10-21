@@ -1,4 +1,5 @@
-﻿@using OnlineWebApp_MVC.Models
+﻿@using MVC_WebApp.Models
+@using OnlineWebApp_MVC.Models
 @model Role
 
 <form method="post">
@@ -18,5 +19,5 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit" asp-controller="Admin" asp-action="AddRole" role="button">Добавить роль</button>
+    <button class="btn btn-primary" type="submit" asp-area="Admin" asp-controller="Admin" asp-action="AddRole" role="button">Добавить роль</button>
 </form>

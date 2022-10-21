@@ -1,4 +1,5 @@
-﻿@model List<Role>
+﻿@using MVC_WebApp.Models
+@model List<Role>
 
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
@@ -25,7 +26,7 @@
                                 <td>@(i + 1)</td>
                                 <td>@Model[i].Name</td>
                                 @*<td><a href="/admin/removeRole?roleName=@Model[i].Name">Удалить</a></td>*@
-                                <td><a asp-controller="Admin" asp-action="removeRole">Удалить</a></td>
+                                <td><a asp-area="Admin" asp-controller="Admin" asp-action="removeRole">Удалить</a></td>
                             </tr>
                         }
                     </tbody>

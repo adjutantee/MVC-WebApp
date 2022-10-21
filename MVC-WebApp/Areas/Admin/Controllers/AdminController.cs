@@ -5,8 +5,9 @@ using OnlineWebApp_MVC.Models;
 using OnlineWebApp_MVC.Services;
 using System;
 
-namespace MVC_WebApp.Controllers
+namespace MVC_WebApp.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly IProductRepository productRepository;
