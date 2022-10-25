@@ -1,5 +1,4 @@
-﻿using MVC_WebApp.Models;
-using OnlineWebApp_MVC.Models;
+﻿using MVC_WebApp.Areas.Admin.Models;
 using System.Collections.Generic;
 
 namespace OnlineWebApp_MVC.Services

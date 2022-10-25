@@ -1,4 +1,4 @@
-﻿using MVC_WebApp.Models;
+﻿using MVC_WebApp.Areas.Admin.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +7,6 @@ namespace OnlineWebApp_MVC.Services
     public class RolesRepository : IRolesRepository
     {
         private readonly List<Role> roles = new List<Role>();
-
         public void Add(Role role)
         {
             roles.Add(role);

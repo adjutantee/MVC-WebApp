@@ -1,5 +1,6 @@
 ﻿@using MVC_WebApp.Models
-@using OnlineWebApp_MVC.Models
+@using OnlineWebApp_MVC.Models;
+@using MVC_WebApp.Areas.Admin.Models
 @model Role
 
 <form method="post">
@@ -9,7 +10,7 @@
     </div>
 
     <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
-     
+
     <div class="row">
         <div class="col-md-6">
             <div class="md-form mb-0">
@@ -19,5 +20,5 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit" asp-area="Admin" asp-controller="Admin" asp-action="AddRole" role="button">Добавить роль</button>
+    <button class="btn btn-primary" type="submit" asp-area="Admin" asp-controller="Role" asp-action="AddRole" role="button">Добавить роль</button>
 </form>
