@@ -1,10 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.Models;
+using MVC_WebApp.Services;
+using OnlineWebApp_MVC.Controllers;
 
 namespace MVC_WebApp.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IUserManager userManager;
+
+        public AccountController(IUserManager userManager)
+        {
+            this.userManager = userManager;
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -13,11 +22,26 @@ namespace MVC_WebApp.Controllers
         [HttpPost]
         public IActionResult Login(Login login)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(Login));
             }
-            return RedirectToAction("Login");
+
+            var userAccount = userManager.TryGetByName(login.exampleLoginEmail);
+
+            if(userAccount == null)
+            {
+                ModelState.AddModelError("", "Такого пользователя не сущетсвует");
+                return RedirectToAction(nameof(Login));
+            }
+
+            if (userAccount.Password != login.exampleLoginPassword)
+            {
+                ModelState.AddModelError("", "Не верный логин или пароль");
+                return RedirectToAction(nameof(Login));
+            }
+
+            return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
         }
 
         public IActionResult Register()
@@ -30,9 +54,15 @@ namespace MVC_WebApp.Controllers
         { 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                userManager.Add(new UserAccount
+                { 
+                    Email = register.exampleLoginEmail,
+                    Password = register.exampleLoginPassword,
+
+                });
+                return RedirectToAction(nameof(HomeController.Index),"Home");
             }
-            return RedirectToAction("Register");
+            return RedirectToAction(nameof(Register));
         }
 
     }

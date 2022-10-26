@@ -27,7 +27,7 @@
                                 <td>@(i + 1)</td>
                                 <td>@Model[i].Name</td>
                                 @*<td><a href="/admin/removeRole?roleName=@Model[i].Name">Удалить</a></td>*@
-                                <td><a asp-area="Admin" asp-controller="Role" asp-action="removeRole">Удалить</a></td>
+                                <td><a asp-area="Admin" asp-controller="Role" asp-action="RemoveRole" asp-route-roleName="@Model[i].Name">Удалить</a></td>
                             </tr>
                         }
                     </tbody>
