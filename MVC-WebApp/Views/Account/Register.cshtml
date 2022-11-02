@@ -28,6 +28,12 @@
         </div>
 
         <div class="form-outline mb-4">
+            <label asp-for="exampleLoginName">Логин</label>
+            <input type="text" asp-for="exampleLoginName" class="form-control" />
+            <span asp-validation-for="exampleLoginName"></span>
+        </div>
+
+        <div class="form-outline mb-4">
             <label asp-for="exampleLoginPassword">Пароль</label>
             <input type="password" asp-for="exampleLoginPassword" class="form-control" />
             <span asp-validation-for="exampleLoginPassword"></span>

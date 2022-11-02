@@ -20,7 +20,7 @@ namespace MVC_WebApp.Services
 
         public UserAccount TryGetByName(string name)
         {
-            return users.FirstOrDefault(x => x.Email == name);
+            return users.FirstOrDefault(x => x.Name == name);
         }
     }
 }

@@ -51,11 +51,12 @@ namespace MVC_WebApp.Controllers
 
         [HttpPost]
         public IActionResult Register(Register register)  
-        { 
+        {
             if (ModelState.IsValid)
             {
                 userManager.Add(new UserAccount
                 { 
+                    Name = register.exampleLoginName,
                     Email = register.exampleLoginEmail,
                     Password = register.exampleLoginPassword,
 
