@@ -19,9 +19,10 @@ namespace MVC_WebApp.Areas.Admin.Controllers
             return View(userAccounts);
         }
 
-        public IActionResult UserDetail()
+        public IActionResult UserDetail(string name)
         {
-            return View();
+            var userAccount = usersManager.TryGetByName(name);
+            return View(userAccount);
         }
 
         [HttpPost]

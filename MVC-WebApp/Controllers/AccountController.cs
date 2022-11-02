@@ -59,6 +59,7 @@ namespace MVC_WebApp.Controllers
                     Name = register.exampleLoginName,
                     Email = register.exampleLoginEmail,
                     Password = register.exampleLoginPassword,
+                    NumberPhone = register.exampleNumberPhone,
 
                 });
                 return RedirectToAction(nameof(HomeController.Index),"Home");
