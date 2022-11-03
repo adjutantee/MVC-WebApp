@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
+using MVC_WebApp.Models;
 using MVC_WebApp.Services;
+using OnlineWebApp_MVC.Controllers;
 
 namespace MVC_WebApp.Areas.Admin.Controllers
 {
@@ -19,16 +23,31 @@ namespace MVC_WebApp.Areas.Admin.Controllers
             return View(userAccounts);
         }
 
-        public IActionResult UserDetail(string name)
+        public IActionResult UserDetail(string email)
         {
-            var userAccount = usersManager.TryGetByName(name);
+            var userAccount = usersManager.TryGetByName(email);
             return View(userAccount);
         }
 
-        [HttpPost]
-        public IActionResult UserDetail(UserManager user)
+        
+        public IActionResult ChangePassword(string email)
         {
-            return View();
+            var changePassword = new ChangePassword()
+            {
+                exampleLoginEmail = email
+            };
+            return View(changePassword);
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePassword changePassword)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.ChangePassword(changePassword.exampleLoginEmail, changePassword.Password);
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(ChangePassword));
         }
     }
 }
