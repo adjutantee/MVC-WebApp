@@ -1,0 +1,22 @@
+﻿@model UserAccount
+
+<form method="post">
+    <div class="row">
+        <div class="col-6">
+            <tr>
+                <td>Логин</td>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <td>Электронный адрес</td>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <td>Телефон</td>
+                <td>@Model.NumberPhone</td>
+            </tr>
+            </table>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit" asp-area="Admin" asp-controller="Order" asp-action="OrderDetailsStatus" asp-route-orderId="@Model.Id">Обновить статус</button>
+</form>
