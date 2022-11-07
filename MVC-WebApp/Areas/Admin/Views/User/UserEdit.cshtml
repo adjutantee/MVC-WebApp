@@ -1,0 +1,35 @@
+﻿@using OnlineWebApp_MVC.Models
+@model UserAccount
+
+<form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+    <input type="hidden" name="exampleLoginEmail" />
+    <div class="row">
+        <div class="col-6">
+            <div class="md-form mb-0">
+                <label asp-for="Name">Имя</label>
+                <input type="text" asp-for="Name" class="form-control" >
+                <span asp-validation-for="Name"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="md-form mb-0">
+                <label asp-for="Email">Электронный адрес</label>
+                <input type="email" asp-for="Email" class="form-control" >
+                <span asp-validation-for="Email"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="md-form mb-0">
+                <label asp-for="NumberPhone">Телефон</label>
+                <input type="number" asp-for="NumberPhone" class="form-control">
+                <span asp-validation-for="NumberPhone"></span>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" asp-area="Admin" asp-controller="User" asp-action="UserEdit" role="button">Сохранить изменения</button>
+</form>

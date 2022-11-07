@@ -8,7 +8,7 @@ namespace MVC_WebApp.Models
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Поле повторного ввода пароля не указан")]
-        [Compare("exampleLoginPassword", ErrorMessage = "Пароли не совпадают")]
+        [Compare("ReTypePassword", ErrorMessage = "Пароли не совпадают")]
         public string ReTypePassword { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace MVC_WebApp.Services
         {
             users.Add(user);
         }
-
+        
         public UserAccount TryGetByName(string email)
         {
             return users.FirstOrDefault(x => x.Email == email);
@@ -27,6 +27,14 @@ namespace MVC_WebApp.Services
         {
             var account = TryGetByName(exampleLoginEmail);
             account.Password = newPassword;
+        }
+
+        public void Edit(UserAccount user)
+        {
+            var existingUser = TryGetByName(user.Name);
+            existingUser.Name = user.Name;
+            existingUser.Email = user.Email;
+            existingUser.NumberPhone = user.NumberPhone;
         }
     }
 }

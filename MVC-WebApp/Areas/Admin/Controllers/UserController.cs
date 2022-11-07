@@ -30,11 +30,11 @@ namespace MVC_WebApp.Areas.Admin.Controllers
         }
 
         
-        public IActionResult ChangePassword(string email)
+        public IActionResult ChangePassword(string name)
         {
             var changePassword = new ChangePassword()
             {
-                exampleLoginEmail = email
+                exampleLoginEmail = name
             };
             return View(changePassword);
         }
@@ -48,6 +48,23 @@ namespace MVC_WebApp.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(ChangePassword));
+        }
+
+        public IActionResult UserEdit(string name)
+        {
+            var userAccount = usersManager.TryGetByName(name);
+            return View(userAccount);
+        }
+
+        [HttpPost]
+        public IActionResult UserEdit(UserAccount user)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.Edit(user);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(usersManager);
         }
     }
 }

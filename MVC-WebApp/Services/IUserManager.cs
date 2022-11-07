@@ -7,7 +7,8 @@ namespace MVC_WebApp.Services
     {
         void Add(UserAccount user);
         void ChangePassword(string exampleLoginEmail, string newPassword);
+        void Edit(UserAccount user);
         List<UserAccount> GetAllUsers();
-        UserAccount TryGetByName(string name);
+        UserAccount TryGetByName(string email);
     }
 }
