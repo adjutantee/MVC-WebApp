@@ -56,9 +56,10 @@ namespace MVC_WebApp.Controllers
             {
                 userManager.Add(new UserAccount
                 { 
+                    Name = register.exampleLoginName,
+                    NumberPhone = register.exampleLoginNumberPhone,
                     Email = register.exampleLoginEmail,
                     Password = register.exampleLoginPassword,
-
                 });
                 return RedirectToAction(nameof(HomeController.Index),"Home");
             }

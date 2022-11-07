@@ -20,7 +20,21 @@ namespace MVC_WebApp.Services
 
         public UserAccount TryGetByName(string name)
         {
-            return users.FirstOrDefault(x => x.Email == name);
+            return users.FirstOrDefault(x => x.Name == name);
+         }
+
+        public void ChangePassword(string userName, string newPassword)
+        {
+            var account = TryGetByName(userName);
+            account.Password = newPassword;
+        }
+
+        public void UserEdit(UserAccount user)
+        {
+            var existingUser = TryGetByName(user.Name);
+            existingUser.Name = user.Name;
+            existingUser.Email = user.Email;
+            existingUser.NumberPhone = user.NumberPhone;
         }
     }
 }

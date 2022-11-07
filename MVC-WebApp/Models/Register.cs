@@ -4,6 +4,10 @@ namespace MVC_WebApp.Models
 {
     public class Register
     {
+        [Required(ErrorMessage = "Не указан логин")]
+        public string exampleLoginName { get; set; }
+        [Required(ErrorMessage = "Не указан номер телефона")]
+        public int exampleLoginNumberPhone { get; set; }
         [Required(ErrorMessage = "Не указан Email")]
         [EmailAddress(ErrorMessage = "Укажите правильный Email")]
         public string exampleLoginEmail { get; set; }

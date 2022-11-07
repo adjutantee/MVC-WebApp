@@ -28,13 +28,25 @@
         </div>
 
         <div class="form-outline mb-4">
+            <label asp-for="exampleLoginName">Логин</label>
+            <input type="text" asp-for="exampleLoginName" class="form-control" />
+            <span asp-validation-for="exampleLoginName"></span>
+        </div>
+
+        <div class="form-outline mb-4">
+            <label asp-for="exampleLoginNumberPhone">Номер телефона</label>
+            <input type="number" asp-for="exampleLoginNumberPhone" class="form-control" />
+            <span asp-validation-for="exampleLoginNumberPhone"></span>
+        </div>
+
+        <div class="form-outline mb-4">
             <label asp-for="exampleLoginPassword">Пароль</label>
             <input type="password" asp-for="exampleLoginPassword" class="form-control" />
             <span asp-validation-for="exampleLoginPassword"></span>
         </div>
 
         <div class="form-outline mb-4">
-            <label asp-for="exampleReTypeLoginPassword">Пароль</label>
+            <label asp-for="exampleReTypeLoginPassword">Повторите пароль</label>
             <input type="password" asp-for="exampleReTypeLoginPassword" class="form-control" />
             <span asp-validation-for="exampleReTypeLoginPassword"></span>
         </div>
