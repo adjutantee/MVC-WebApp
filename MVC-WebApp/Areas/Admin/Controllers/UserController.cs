@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 using MVC_WebApp.Areas.Admin.Models;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
@@ -10,43 +10,66 @@ namespace MVC_WebApp.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly IUserManager usersManager;
+        private readonly IUserManager userManager;
 
-        public UserController(IUserManager usersManager)
+        public UserController(IUserManager userManager)
         {
-            this.usersManager = usersManager;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var userAccounts = usersManager.GetAllUsers();
+            var userAccounts = userManager.GetAllUsers();
             return View(userAccounts);
         }
 
-        public IActionResult UserDetail(string email)
+        public IActionResult UserDetail(string name)
         {
-            var userAccount = usersManager.TryGetByName(email);
+            var userAccount = userManager.TryGetByName(name);
             return View(userAccount);
         }
-
-        public IActionResult UserChangePassword(string email)
+        
+        public IActionResult ChangePassword(string name)
         {
             var changePassword = new ChangePassword()
             {
-                UserAccountName = email,
+                UserName = name
             };
             return View(changePassword);
         }
-         
+
         [HttpPost]
-        public IActionResult UserChangePassword(ChangePassword changePassword)
+        public IActionResult ChangePassword(ChangePassword changePassword)
         {
             if (ModelState.IsValid)
             {
-                usersManager.ChangePassword(changePassword.UserAccountName, changePassword.UserAccountPassword);
+                userManager.ChangePassword(changePassword.UserName, changePassword.Password);
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(ChangePassword));
+        }
+
+        public IActionResult UserEdit(string name)
+        {
+            var userAccount = userManager.TryGetByName(name);
+            return View(userAccount);
+        }
+
+        [HttpPost]
+        public IActionResult UserEdit(UserAccount user)
+        {
+            if (ModelState.IsValid)
+            {
+                userManager.UserEdit(user);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(userManager);
+        }
+
+        public IActionResult DeleteUser(string name)
+        {
+            userManager.Remove(name);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

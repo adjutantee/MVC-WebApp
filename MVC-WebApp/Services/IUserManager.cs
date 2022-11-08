@@ -6,8 +6,10 @@ namespace MVC_WebApp.Services
     public interface IUserManager
     {
         void Add(UserAccount user);
+        void ChangePassword(string userName, string newPassword);
         List<UserAccount> GetAllUsers();
+        void Remove(string name);
         UserAccount TryGetByName(string name);
-        void ChangePassword(string userAccountName, string newPassword);
+        void UserEdit(UserAccount user);
     }
 }

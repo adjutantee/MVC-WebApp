@@ -4,13 +4,13 @@ namespace MVC_WebApp.Areas.Admin.Models
 {
     public class ChangePassword
     {
-        [Required(ErrorMessage = "Не указан emali")]
-        public string UserAccountName { get; set; }
+        public string UserName { get; set; }
+        [Required(ErrorMessage = "Заполните поле пароля")]
+        public string Password { get; set; }
+        [Required(ErrorMessage = "Заполните поле повторного ввода пароля")]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Не указан пароль")]
-        public string UserAccountPassword { get; set; }
-        [Required(ErrorMessage = "Поле повторного ввода пароля не указан")]
-        [Compare("exampleLoginPassword", ErrorMessage = "Пароли не совпадают")]
-        public string ReTypeUserAccountPassword { get; set; }
+
     }
 }

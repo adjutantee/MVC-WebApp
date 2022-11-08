@@ -23,7 +23,7 @@
                                 <td>@(i + 1)</td>
                                 <td>@Model[i].Name</td>
                                 <td>@Model[i].Email</td>
-                                <td><a asp-area="Admin" asp-controller="User" asp-action="UserDetail" asp-route-email="@Model[i].Email">Подробнее</a></td>
+                                <td><a asp-area="Admin" asp-controller="User" asp-action="UserDetail" asp-route-name="@Model[i].Name">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>
