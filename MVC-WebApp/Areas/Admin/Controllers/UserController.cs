@@ -65,5 +65,11 @@ namespace MVC_WebApp.Areas.Admin.Controllers
             }
             return View(userManager);
         }
+
+        public IActionResult DeleteUser(string name)
+        {
+            userManager.Remove(name);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

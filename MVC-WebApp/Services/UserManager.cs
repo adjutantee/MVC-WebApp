@@ -36,5 +36,10 @@ namespace MVC_WebApp.Services
             existingUser.Email = user.Email;
             existingUser.NumberPhone = user.NumberPhone;
         }
+
+        public void Remove(string name)
+        {
+            users.Remove(TryGetByName(name));
+        }
     }
 }
