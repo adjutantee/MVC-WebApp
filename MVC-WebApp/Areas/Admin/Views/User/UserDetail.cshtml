@@ -22,7 +22,7 @@
     Действия
 </button>
 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-email="@Model.Name">Смена пароля</a>
+    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-name="@Model.Name">Смена пароля</a>
     <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="UserEdit" asp-route-name="@Model.Name">Редактировать пользователя</a>
     <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-name="@Model.Name">Права доступа</a>
     <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="DeleteUser" asp-route-name="@Model.Name">Удалить пользователя</a>
