@@ -12,6 +12,8 @@ namespace MVC_WebApp.db
     {
         // Доступ к таблицам. Каждый DbSet это доступ к какой то одной таблице.
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {

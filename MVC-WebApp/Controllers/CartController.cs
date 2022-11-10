@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_WebApp.db;
+using MVC_WebApp.Helpers;
 using MVC_WebApp.Services;
-using OnlineWebApp_MVC.Services;
+using System;
 
 namespace MVC_WebApp.Controllers
 {
@@ -18,17 +20,17 @@ namespace MVC_WebApp.Controllers
         public IActionResult Index()
         {
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            return View(cart);
+            return View(Mapping.ToCartViewModel(cart));
         }
 
-        public IActionResult Add(int productId)
+        public IActionResult Add(Guid productId)
         {
             var product = productRepository.TryGetById(productId);
             cartsRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
-        public IActionResult DecreaseAmount(int productId)
+        public IActionResult DecreaseAmount(Guid productId)
         {
             cartsRepository.DecreaseAmount(productId, Constants.UserId);
             return RedirectToAction("Index");

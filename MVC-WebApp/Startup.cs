@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC_WebApp.db;
 using MVC_WebApp.Services;
 using OnlineWebApp_MVC.Services;
 using Serilog;
@@ -21,9 +23,13 @@ namespace MVC_WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("Mvc_WebApp");
+            services.AddDbContext<DataBaseContext>(options =>
+                options.UseSqlServer(connection));
+
             services.AddControllersWithViews();
-            services.AddSingleton<IProductRepository, ProductRepository>();
-            services.AddSingleton<ICartsRepository, CartsRepository>();
+            services.AddTransient<IProductRepository, ProductsDbRepository>();
+            services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddSingleton<IOrdersRepository, OrdersRepository>();
             services.AddSingleton<IRolesRepository, RolesRepository>();
             services.AddSingleton<IUserManager, UserManager>();

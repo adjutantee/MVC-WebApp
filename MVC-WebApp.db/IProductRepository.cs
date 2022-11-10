@@ -1,14 +1,15 @@
-﻿using OnlineWebApp_MVC.Models;
+﻿using MVC_WebApp.db.Models;
+using System;
 using System.Collections.Generic;
 
-namespace OnlineWebApp_MVC.Services
+namespace MVC_WebApp.db
 {
     public interface IProductRepository
     {
         List<Product> GetAllProduct();
-        Product TryGetById(int id);
+        Product TryGetById(Guid id);
         void Add(Product product);
         void Update(Product product);
-        void Remove(int product);
+        void Remove(Guid product);
     }
 }

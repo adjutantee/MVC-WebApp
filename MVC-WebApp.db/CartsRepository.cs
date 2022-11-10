@@ -1,18 +1,23 @@
-﻿using MVC_WebApp.Models;
-using OnlineWebApp_MVC.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_WebApp.db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MVC_WebApp.Services
+namespace MVC_WebApp.db
 {
-    public class CartsRepository : ICartsRepository
+    public class CartsDbRepository : ICartsRepository
     {
-        private List<Cart> carts = new List<Cart>();
+        private readonly DataBaseContext dataBaseContext;
+
+        public CartsDbRepository(DataBaseContext dataBaseContext)
+        {
+            this.dataBaseContext = dataBaseContext;
+        }
 
         public Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            return dataBaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId) // Добавление в корзину
@@ -20,22 +25,22 @@ namespace MVC_WebApp.Services
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null) // Если у пользователя нет корзины, создаем новую
             {
-                var newCart = new Cart()
+                var newCart = new Cart
                 {
-                    Id = Guid.NewGuid(),
-                    UserId = userId,
-                    Items = new List<CartItem>
+                    UserId = userId
+                };
+
+                newCart.Items = new List<CartItem>
+                {
+                    new CartItem
                     {
-                        new CartItem()
-                        {
-                            Id = Guid.NewGuid(),
-                            Amount = 1,
-                            Product = product
-                        }
+                        Amount = 1,
+                        Product = product,
+                        Cart = newCart
                     }
                 };
 
-                carts.Add(newCart);
+                dataBaseContext.Carts.Add(newCart);
             }
             else
             {
@@ -48,15 +53,17 @@ namespace MVC_WebApp.Services
                 {
                     existingCart.Items.Add(new CartItem
                     {
-                        Id = Guid.NewGuid(),
                         Amount = 1,
-                        Product = product
+                        Product = product,
+                        Cart = existingCart
                     });
                 }
             }
+
+            dataBaseContext.SaveChanges();
         }
 
-        public void DecreaseAmount(int productId, string userId)
+        public void DecreaseAmount(Guid productId, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart?.Items?.FirstOrDefault(x => x.Product.Id == productId);// Проверяет есть ли позиция с таким же продуктом
@@ -72,12 +79,15 @@ namespace MVC_WebApp.Services
             {
                 existingCart.Items.Remove(existingCartItem);
             }
+
+            dataBaseContext.SaveChanges();
         }
 
         public void Clear(string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            carts.Remove(existingCart);
+            dataBaseContext.Carts.Remove(existingCart);
+            dataBaseContext.SaveChanges();
         }
     }
 }

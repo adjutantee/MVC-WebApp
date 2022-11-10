@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_WebApp.db;
+using MVC_WebApp.db.Models;
+using MVC_WebApp.Helpers;
 using OnlineWebApp_MVC.Models;
-using OnlineWebApp_MVC.Services;
+using System;
+using System.Collections.Generic;
 
 namespace MVC_WebApp.Areas.Admin.Controllers
 {
@@ -17,7 +21,8 @@ namespace MVC_WebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAllProduct();
-            return View(products);
+            
+            return View(Mapping.ToProductViewModel(products));
         }
 
         public IActionResult AddProduct()
@@ -26,34 +31,49 @@ namespace MVC_WebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult AddProduct(ProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return View(product);
             }
-            productRepository.Add(product);
+
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+            };
+            productRepository.Add(productDb);
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditProduct(int productId)
+        public IActionResult EditProduct(Guid productId)
         {
             var product = productRepository.TryGetById(productId);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult EditProduct(Product product)
+        public IActionResult EditProduct(ProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return View(product);
             }
-            productRepository.Update(product);
+
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+            };
+
+            productRepository.Update(productDb);
             return RedirectToAction("Index");
         }
 
-        public IActionResult ClearProduct(int productId)
+        public IActionResult ClearProduct(Guid productId)
         {
             productRepository.Remove(productId);
             return RedirectToAction("Index");

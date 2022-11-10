@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineWebApp_MVC.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-        private static int instanceCounter = 1;
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required(ErrorMessage = "Укажите имя товара")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Заполните описание товара")]
@@ -14,20 +13,6 @@ namespace OnlineWebApp_MVC.Models
         public string ImagePath { get; set; }
         [Required(ErrorMessage = "Укажите цену товара")]
         public Decimal Cost { get; set; }
-
-        public Product()
-        {
-            Id = instanceCounter;
-            instanceCounter += 1;
-        }
-
-        public Product(string name, string description, string imagePath, decimal cost) : this()
-        {
-            Name = name;
-            Description = description;
-            ImagePath = imagePath;
-            Cost = cost;
-        }
     }
 }
  

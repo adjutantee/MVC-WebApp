@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_WebApp.db;
+using MVC_WebApp.Helpers;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
 
@@ -31,10 +33,13 @@ namespace MVC_WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
+
+                var existingCartViewModel = Mapping.ToCartViewModel(existingCart);
+
                 var order = new Order()
                 {
                     User = user,
-                    Items = existingCart.Items
+                    Items = existingCartViewModel.Items
                 };
                 ordersRepository.Add(order);
                 cartsRepository.Clear(Constants.UserId);

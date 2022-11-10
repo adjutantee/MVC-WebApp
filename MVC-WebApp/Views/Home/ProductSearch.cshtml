@@ -1,5 +1,5 @@
 ﻿@using OnlineWebApp_MVC.Models
-@model List<Product>
+@model List<ProductViewModel>
 
     @if(Model.Count == 0)
 {
@@ -25,7 +25,6 @@ else
                 <br />
                 <br /><a class="btn btn-danger" href="/favorites/addtofavorites/@product.Id" role="button">в избранное</a>
             </div>
-
         </div>
 
     }

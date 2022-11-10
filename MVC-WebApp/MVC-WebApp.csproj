@@ -14,4 +14,8 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MVC-WebApp.db\MVC-WebApp.db.csproj" />
+  </ItemGroup>
+
 </Project>
