@@ -57,5 +57,52 @@ namespace MVC_WebApp.Helpers
             }
             return cartItems;
         }
+
+        public static List<OrderViewModel> ToOrderViewModels(this List<Order> orders)
+        {
+            var ordersViewModel = new List<OrderViewModel>();
+            foreach (var order in orders)
+            {
+                ordersViewModel.Add(ToOrderViewModel(order)); 
+            }
+            return ordersViewModel;
+        }
+
+        public static OrderViewModel ToOrderViewModel(this Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                Date = order.Date,
+                Time = order.Time,
+                Items = ToCartItemViewModels(order.Items),
+                UserDeliveryInfo = ToUserDeliveryInfoViewModel(order.UserDeliveryInfo),
+                Status = (OrderStatusViewModel)(int)order.Status
+            };
+        }
+
+        public static UserDeliveryInfoViewModel ToUserDeliveryInfoViewModel(UserDeliveryInfo userDeliveryInfo)
+        {
+            return new UserDeliveryInfoViewModel
+            {
+                userOrderName = userDeliveryInfo.userOrderName,
+                userOrderEmail = userDeliveryInfo.userOrderEmail,
+                userOrderPhone = userDeliveryInfo.userOrderPhone,
+                userAdres = userDeliveryInfo.userAdres,
+                userOrderMessage = userDeliveryInfo.userOrderMessage,
+            };
+        }
+
+        public static UserDeliveryInfo ToDbDelivery(UserDeliveryInfoViewModel userDeliveryInfo)
+        {
+            return new UserDeliveryInfo
+            {
+                userOrderName = userDeliveryInfo.userOrderName,
+                userOrderEmail = userDeliveryInfo.userOrderEmail,
+                userOrderPhone = userDeliveryInfo.userOrderPhone,
+                userAdres = userDeliveryInfo.userAdres,
+                userOrderMessage = userDeliveryInfo.userOrderMessage,
+            };
+        }
     }
 }

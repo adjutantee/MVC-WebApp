@@ -5,20 +5,19 @@ using System.Linq;
 
 namespace MVC_WebApp.Models
 {
-    public class Order
+    public class OrderViewModel
     {
         public Guid Id { get; set; }
-        public UserDeliveryInfo User { get; set; }
+        public UserDeliveryInfoViewModel UserDeliveryInfo { get; set; }
         public List<CartItemViewModel> Items { get; set; }
 
-        public OrderStatus Status { get; set; }
-        public DateTime CreateDateTime { get; set; }
+        public OrderStatusViewModel Status { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
 
-        public Order()
+        public OrderViewModel()
         {
-            Id = Guid.NewGuid();
-            Status = OrderStatus.Created;
-            CreateDateTime = DateTime.Now;
+            Status = OrderStatusViewModel.Created;
         }
 
         public decimal Cost

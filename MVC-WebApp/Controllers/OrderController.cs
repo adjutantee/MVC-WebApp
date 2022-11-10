@@ -23,7 +23,7 @@ namespace MVC_WebApp.Controllers
         }
         
         [HttpPost]
-        public IActionResult Buy(UserDeliveryInfo user)
+        public IActionResult Buy(UserDeliveryInfoViewModel user)
         {
             if (!ModelState.IsValid)
             {
@@ -33,15 +33,7 @@ namespace MVC_WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
-
-                var existingCartViewModel = Mapping.ToCartViewModel(existingCart);
-
-                var order = new Order()
-                {
-                    User = user,
-                    Items = existingCartViewModel.Items
-                };
-                ordersRepository.Add(order);
+                ordersRepository.Add(existingCart.Items, Mapping.ToDbDelivery(user));
                 cartsRepository.Clear(Constants.UserId);
                 return View();
             }

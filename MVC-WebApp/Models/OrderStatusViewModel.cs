@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC_WebApp.Models
 {
-    public enum OrderStatus
+    public enum OrderStatusViewModel
     {
         [Display(Name = "Создан")]
         Created,

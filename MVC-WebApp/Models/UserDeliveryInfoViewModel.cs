@@ -2,7 +2,7 @@
 
 namespace MVC_WebApp.Models
 {
-    public class UserDeliveryInfo
+    public class UserDeliveryInfoViewModel
     {
         [Required(ErrorMessage = "Не указано имя")]
         public string userOrderName { get; set; }

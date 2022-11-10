@@ -2,7 +2,7 @@
 @using MVC_WebApp.Models
 @using OnlineWebApp_MVC.Models
 @using MVC_WebApp.Areas.Admin.Models
-@model List<Order>
+@model List<OrderViewModel>
 
 
 <div class="row">
@@ -33,8 +33,8 @@
                                 <td>@Model[i].Cost</td>
                                 <td>Admin</td>
                                 <td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
-                                <td>@Model[i].CreateDateTime.ToString("d")</td>
-                                <td>@Model[i].CreateDateTime.ToString("t")</td>
+                                <td>@Model[i].Date</td>
+                                <td>@Model[i].Time</td>
                                 <td><a href="/admin/Order/OrderDetails?orderId=@Model[i].Id">Подробнее</a></td>
                             </tr>
                         }

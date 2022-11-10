@@ -31,7 +31,7 @@ namespace MVC_WebApp
             services.AddTransient<IProductRepository, ProductsDbRepository>();
             services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IFavouriteDbRepository, FavouriteDbRepository>();
-            services.AddSingleton<IOrdersRepository, OrdersRepository>();
+            services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddSingleton<IRolesRepository, RolesRepository>();
             services.AddSingleton<IUserManager, UserManager>();
         }

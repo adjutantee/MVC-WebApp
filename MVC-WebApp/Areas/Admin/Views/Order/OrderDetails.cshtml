@@ -1,4 +1,4 @@
-﻿@model Order
+﻿@model OrderViewModel
 
 <form method="post">
     <div class="row">
@@ -6,19 +6,19 @@
             <table class="table">
                 <tr>
                     <td>Дата и время</td>
-                    <td>@Model.CreateDateTime.ToString("g")</td>
+                    <td>@Model.Date + @Model.Time</td>
                 </tr>
                 <tr>
                     <td>Адрес доставки</td>
-                    <td>@Model.User.userAdres</td>
+                    <td>@Model.UserDeliveryInfo.userAdres</td>
                 </tr>
                 <tr>
                     <td>Получатель</td>
-                    <td>@Model.User.userOrderName</td>
+                    <td>@Model.UserDeliveryInfo.userOrderName</td>
                 </tr>
                 <tr>
                     <td>Почта</td>
-                    <td>@Model.User.userOrderEmail</td>
+                    <td>@Model.UserDeliveryInfo.userOrderEmail</td>
                 </tr>
                 <tr>
                     <td>Сумма заказа</td>
@@ -26,12 +26,12 @@
                 </tr>
                 <tr>
                     <td>Сообщение заказчика</td>
-                    <td>@Model.User.userOrderMessage</td>
+                    <td>@Model.UserDeliveryInfo.userOrderMessage</td>
                 </tr>
                 <tr>
                     <td>Статус заказа</td>
                     <td>
-                        <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()" class="form-control"></select>
+                        <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatusViewModel>()" class="form-control"></select>
                     </td>
                 </tr>
             </table>
