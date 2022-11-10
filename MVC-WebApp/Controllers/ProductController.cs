@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.db;
+using MVC_WebApp.Helpers;
 using System;
 
 namespace MVC_WebApp.Controllers
@@ -16,7 +17,7 @@ namespace MVC_WebApp.Controllers
         public IActionResult Index(Guid id)
         {
             var product = productRepository.TryGetById(id);
-            return View(product);
+            return View(Mapping.ToProductViewModel(product));
         }
     }
 }

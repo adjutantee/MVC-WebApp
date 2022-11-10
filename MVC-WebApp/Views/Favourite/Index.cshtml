@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using OnlineWebApp_MVC.Models
+@model List<ProductViewModel>
+
+@if (Model == null || Model.Count == 0)
+{
+    <h3>Список избранного пуст</h3>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-3 card shadow">
+
+                <img class="card-img-top" src="/css/PHTTest.png" />
+
+                <div class="card-body">
+                    <a style="color:grey" href="/product/index/@product.Id">
+                        <h5>@product.Name</h5>
+                    </a>
+
+                    <h4>@product.Cost</h4>
+
+                    <a class="btn btn-dark" asp-area="" asp-controller="cart" asp-action="Add" asp-route-productId="@product.Id" role="button">Добавить в корзину</a>
+                    <p></p>
+                    <a class="btn btn-success btn-sm" asp-area="" asp-controller="compare" asp-action="Add" asp-route-productId="@product.Id" role="button">Добавить в сравнение</a>
+                    <p></p>
+                    <a class="btn btn-danger" asp-area="" asp-controller="favourite" asp-action="delete" asp-route-productId="@product.Id" role="button">Удалить из избранного</a>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <a class="btn btn-danger" asp-area="" asp-controller="favourite" asp-action="clear" role="button">Очистить избранное</a>
+
 }

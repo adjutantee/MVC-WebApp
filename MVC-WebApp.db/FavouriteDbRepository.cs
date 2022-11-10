@@ -21,5 +21,19 @@ namespace MVC_WebApp.db
         {
             return dataBaseContext.FavoriteProducts.Where(x => x.UserId == userid).Include(x => x.Product).Select(x => x.Product).ToList();
         }
+
+        public void Add(Product product, string userId)
+        {
+            var existingProduct = dataBaseContext.FavoriteProducts.FirstOrDefault(x => x.UserId == userId && x.Product.Id == product.Id);
+            if (existingProduct == null)
+            {
+                dataBaseContext.FavoriteProducts.Add(new FavouriteProduct
+                {
+                    Product = product,
+                    UserId = userId,
+                });
+                dataBaseContext.SaveChanges();
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using MVC_WebApp.db;
 using MVC_WebApp.Helpers;
 using MVC_WebApp.Services;
+using System;
 
 namespace MVC_WebApp.Controllers
 {
@@ -20,6 +21,13 @@ namespace MVC_WebApp.Controllers
         {
             var product = favouriteDbRepository.GetFavourites(Constants.UserId);
             return View(Mapping.ToProductViewModel(product));
+        }
+
+        public IActionResult Add(Guid productId)
+        {
+            var product = productRepository.TryGetById(productId);
+            favouriteDbRepository.Add(product, Constants.UserId);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
