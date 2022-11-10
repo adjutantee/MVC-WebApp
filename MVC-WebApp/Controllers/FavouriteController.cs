@@ -29,5 +29,17 @@ namespace MVC_WebApp.Controllers
             favouriteDbRepository.Add(product, Constants.UserId);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Clear()
+        {
+            favouriteDbRepository.Clear(Constants.UserId);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(Guid productId)
+        {
+            favouriteDbRepository.Delete(productId, Constants.UserId);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -35,5 +35,19 @@ namespace MVC_WebApp.db
                 dataBaseContext.SaveChanges();
             }
         }
+
+        public void Clear(string userId)
+        {
+            var existingFavourite = dataBaseContext.FavoriteProducts.Where(x => x.UserId == userId).ToList();
+            dataBaseContext.FavoriteProducts.RemoveRange(existingFavourite);
+            dataBaseContext.SaveChanges();
+        }
+
+        public void Delete(Guid productId, string userId)
+        {
+            var existingFavourite = dataBaseContext.FavoriteProducts.FirstOrDefault(x => x.UserId == userId && x.Product.Id == productId);
+            dataBaseContext.FavoriteProducts.Remove(existingFavourite);
+            dataBaseContext.SaveChanges();
+        }
     }
 }
