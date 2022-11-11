@@ -10,8 +10,10 @@ namespace MVC_WebApp.db.Models
         public string UserId { get; set; }
 
         public List<CartItem> Items { get; set; }
+        public DateTime CreatedDateTime { get; set; }
         public Cart()
         {
+            CreatedDateTime = DateTime.Now;
             Items = new List<CartItem>();
         }
     }
