@@ -34,7 +34,7 @@ namespace OnlineWebApp_MVC.Controllers
             if (name != null)
             {
                 var productSearch = productRepository.GetAllProduct().FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
-                return View(productSearch);
+                return View(Mapping.ToProductViewModel(productSearch));
             }
             else
             {
