@@ -19,7 +19,7 @@ namespace MVC_WebApp.db
 
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
-            Database.EnsureCreated(); // Создаем базу при первом обращении
+            Database.Migrate();
         }
     }
 }
