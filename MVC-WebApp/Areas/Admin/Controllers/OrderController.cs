@@ -27,7 +27,7 @@ namespace MVC_WebApp.Areas.Admin.Controllers
         public IActionResult OrderDetails(Guid orderId)
         {
             var order = ordersRepository.TryGetByUserId(orderId);
-            return View(order);
+            return View(order.ToOrderViewModel());
         }
 
         [HttpPost]
