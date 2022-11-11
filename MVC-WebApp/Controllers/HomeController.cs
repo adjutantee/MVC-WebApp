@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.db;
+using MVC_WebApp.db.Models;
 using MVC_WebApp.Helpers;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
 using OnlineWebApp_MVC.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace OnlineWebApp_MVC.Controllers
 {
@@ -22,8 +24,9 @@ namespace OnlineWebApp_MVC.Controllers
 
         public IActionResult Index()
         {
-            //var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            //ViewBag.ProductCount = cart?.Amount;
+            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
+            var cartViewModel = Mapping.ToCartViewModel(cart);
+            ViewBag.ProductCount = cartViewModel?.Amount;
             var products = productRepository.GetAllProduct();
             return View(Mapping.ToProductViewModel(products));
         }
