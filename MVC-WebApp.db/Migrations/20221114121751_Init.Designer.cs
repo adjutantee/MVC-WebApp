@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_WebApp.db.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20221111132224_AddCreatedDateTime")]
-    partial class AddCreatedDateTime
+    [Migration("20221114121751_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,9 +2,6 @@
 using MVC_WebApp.db.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MVC_WebApp.db
 {
@@ -20,6 +17,39 @@ namespace MVC_WebApp.db
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
             Database.Migrate();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>().HasData(new List<Product>()
+            {
+                new Product
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Name1",
+                    Description = "Кроссовки фирмы Nike",
+                    ImagePath = "/css/PHTTest.png",
+                    Cost = 15000
+                },
+
+                new Product
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Name2",
+                    Description = "Кроссовки фирмы Nike",
+                    ImagePath = "/css/PHTTest.png",
+                    Cost = 11000
+                },
+                new Product
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Name3",
+                    Description = "Кроссовки фирмы Nike",
+                    ImagePath = "/css/PHTTest.png",
+                    Cost = 17000
+                },
+            });
+
         }
     }
 }

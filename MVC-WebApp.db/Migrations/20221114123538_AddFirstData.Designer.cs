@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_WebApp.db.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20221111131149_Initialization")]
-    partial class Initialization
+    [Migration("20221114123538_AddFirstData")]
+    partial class AddFirstData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,9 @@ namespace MVC_WebApp.db.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -129,6 +132,32 @@ namespace MVC_WebApp.db.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("582ed83d-ccc0-4681-9e0c-4f85fd64f996"),
+                            Cost = 15000m,
+                            Description = "Кроссовки фирмы Nike",
+                            ImagePath = "/css/PHTTest.png",
+                            Name = "Name1"
+                        },
+                        new
+                        {
+                            Id = new Guid("dd1f943b-141e-44c7-a02d-872a6c3c7e53"),
+                            Cost = 11000m,
+                            Description = "Кроссовки фирмы Nike",
+                            ImagePath = "/css/PHTTest.png",
+                            Name = "Name2"
+                        },
+                        new
+                        {
+                            Id = new Guid("56dd4601-3d58-44a4-b9e2-d3e9131c436b"),
+                            Cost = 17000m,
+                            Description = "Кроссовки фирмы Nike",
+                            ImagePath = "/css/PHTTest.png",
+                            Name = "Name3"
+                        });
                 });
 
             modelBuilder.Entity("MVC_WebApp.db.Models.UserDeliveryInfo", b =>

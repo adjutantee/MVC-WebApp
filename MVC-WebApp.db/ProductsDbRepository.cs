@@ -14,16 +14,6 @@ namespace MVC_WebApp.db
             this.dataBaseContext = dataBaseContext;
         }
 
-        //private List<Product> products = new List<Product>()
-        //{
-        //    new Product("Name1", "Кроссовки фирмы Nike",
-        //        "/css/PHTTest.png", 15000),
-        //    new Product("Name2", "Кроссовки фирмы Nike",
-        //        "/css/PHTTest.png", 12000),
-        //    new Product("Name3", "Кроссовки фирмы Nike",
-        //        "/css/PHTTest.png", 19000),
-        //};
-
         public void Add(Product product)
         {
             product.ImagePath = "/css/PHTTest.png";
