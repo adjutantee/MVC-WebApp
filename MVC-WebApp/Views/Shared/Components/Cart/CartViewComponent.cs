@@ -20,6 +20,11 @@ namespace MVC_WebApp.Views.Shared.ViewComponents.CartViewComponents
             var cart = cartRepository.TryGetByUserId(Constants.UserId);
             var cartViewModel = Mapping.ToCartViewModel(cart);
             var productsCount = cartViewModel?.Amount ?? 0;
+            
+            if (productsCount == 0)
+            {
+                return View("Empty", string.Empty);
+            }
             return View("Cart", productsCount);
         }
     }
