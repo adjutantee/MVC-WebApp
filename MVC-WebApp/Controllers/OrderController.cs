@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.db;
 using MVC_WebApp.Helpers;
 using MVC_WebApp.Models;
@@ -6,6 +7,7 @@ using MVC_WebApp.Services;
 
 namespace MVC_WebApp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly ICartsRepository cartsRepository;

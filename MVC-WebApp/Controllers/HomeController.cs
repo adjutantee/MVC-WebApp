@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.db;
-using MVC_WebApp.db.Models;
 using MVC_WebApp.Helpers;
-using MVC_WebApp.Models;
-using MVC_WebApp.Services;
-using OnlineWebApp_MVC.Models;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace OnlineWebApp_MVC.Controllers
 {

@@ -18,37 +18,38 @@
 
 <form method="post">
 
-    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
 
     <div class="text-center loginForm">
         <div class="form-outline mb-4">
-            <label asp-for="exampleLoginEmail">Электронный адрес</label>
-            <input type="email" asp-for="exampleLoginEmail" class="form-control" />
-            <span asp-validation-for="exampleLoginEmail"></span>
+            <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+            <label asp-for="exampleRegisterEmail">Электронный адрес</label>
+            <input type="email" asp-for="exampleRegisterEmail" class="form-control" />
+            <span asp-validation-for="exampleRegisterEmail"></span>
         </div>
 
         <div class="form-outline mb-4">
-            <label asp-for="exampleLoginName">Логин</label>
-            <input type="text" asp-for="exampleLoginName" class="form-control" />
-            <span asp-validation-for="exampleLoginName"></span>
+            <label asp-for="exampleRegisterName">Логин</label>
+            <input type="text" asp-for="exampleRegisterName" class="form-control" />
+            <span asp-validation-for="exampleRegisterName"></span>
         </div>
 
         <div class="form-outline mb-4">
-            <label asp-for="exampleLoginNumberPhone">Номер телефона</label>
-            <input type="number" asp-for="exampleLoginNumberPhone" class="form-control" />
-            <span asp-validation-for="exampleLoginNumberPhone"></span>
+            <label asp-for="exampleRegisterNumberPhone">Номер телефона</label>
+            <input type="number" asp-for="exampleRegisterNumberPhone" class="form-control" />
+            <span asp-validation-for="exampleRegisterNumberPhone"></span>
         </div>
 
         <div class="form-outline mb-4">
-            <label asp-for="exampleLoginPassword">Пароль</label>
-            <input type="password" asp-for="exampleLoginPassword" class="form-control" />
-            <span asp-validation-for="exampleLoginPassword"></span>
+            <label asp-for="exampleRegisterPassword">Пароль</label>
+            <input type="password" asp-for="exampleRegisterPassword" class="form-control" />
+            <span asp-validation-for="exampleRegisterPassword"></span>
         </div>
 
         <div class="form-outline mb-4">
-            <label asp-for="exampleReTypeLoginPassword">Повторите пароль</label>
-            <input type="password" asp-for="exampleReTypeLoginPassword" class="form-control" />
-            <span asp-validation-for="exampleReTypeLoginPassword"></span>
+            <label asp-for="exampleReTypeRegisterPassword">Повторите пароль</label>
+            <input type="password" asp-for="exampleReTypeRegisterPassword" class="form-control" />
+            <span asp-validation-for="exampleReTypeRegisterPassword"></span>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block mb-4" asp-controller="Account" asp-action="Register">Создать аккаунт</button>

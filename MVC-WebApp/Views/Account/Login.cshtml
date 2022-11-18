@@ -17,15 +17,15 @@
 </style>
 
 <form method="post">
-
-    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
 
     <div class="text-center loginForm">
         <div class="form-outline mb-4">
+            <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
             <label asp-for="exampleLoginEmail">Электронный адрес</label>
             <input type="email" asp-for="exampleLoginEmail" class="form-control" />
             <span asp-validation-for="exampleLoginEmail"></span>
-        </div>
+        </div> 
 
         <div class="form-outline mb-4">
             <label asp-for="exampleLoginPassword">Пароль</label>
@@ -37,7 +37,7 @@
             <div class="col d-flex justify-content-center">
                 <div class="form-check">
                     <label asp-for="exampleLoginCheckBox">Запомнить меня</label>
-                    <input class="form-check-input" type="checkbox" asp-for="exampleLoginCheckBox" value="" />
+                    <input class="form-check-input" type="checkbox" asp-for="exampleLoginCheckBox" value="true" />
                     <span asp-validation-for="exampleLoginCheckBox"></span>
                 </div>
             </div>
@@ -50,7 +50,7 @@
         <button type="submit" class="btn btn-primary btn-block mb-4" asp-controller="Account" asp-action="Login">Войти</button>
 
         <div class="text-center">
-            <p>Нет аккаунта? <a asp-controller="Account" asp-action="Register">Регистрация</a></p>
+            <p>Нет аккаунта? <a asp-controller="Account" asp-action="Register" asp-route-ReturnUrl="@Model.ReturnUrl">Регистрация</a></p>
         </div>
     </div>
 </form>

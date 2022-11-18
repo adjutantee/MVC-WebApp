@@ -10,5 +10,6 @@ namespace MVC_WebApp.Models
         [Required(ErrorMessage = "Не указан пароль")]
         public string exampleLoginPassword { get; set; }
         public bool exampleLoginCheckBox { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVC_WebApp.db;
+using MVC_WebApp.db.Models;
 using MVC_WebApp.Services;
 using OnlineWebApp_MVC.Services;
 using Serilog;
+using System;
 
 namespace MVC_WebApp
 {
@@ -24,8 +28,29 @@ namespace MVC_WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("Mvc_WebApp");
+
+            // добавляем контекст DatabaseContext в качестве сервиса в приложение
             services.AddDbContext<DataBaseContext>(options =>
                 options.UseSqlServer(connection));
+
+            // добавляем контекст IdentityContext в качестве сервиса в приложение
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+            // настройки кук
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.Cookie = new CookieBuilder
+                {
+                    IsEssential = true,
+                };
+            });
 
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository, ProductsDbRepository>();
@@ -53,6 +78,7 @@ namespace MVC_WebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

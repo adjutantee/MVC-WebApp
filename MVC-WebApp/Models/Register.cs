@@ -5,16 +5,17 @@ namespace MVC_WebApp.Models
     public class Register
     {
         [Required(ErrorMessage = "Не указан логин")]
-        public string exampleLoginName { get; set; }
+        public string exampleRegisterName { get; set; }
         [Required(ErrorMessage = "Не указан номер телефона")]
-        public int exampleLoginNumberPhone { get; set; }
+        public string exampleRegisterNumberPhone { get; set; }
         [Required(ErrorMessage = "Не указан Email")]
         [EmailAddress(ErrorMessage = "Укажите правильный Email")]
-        public string exampleLoginEmail { get; set; }
+        public string exampleRegisterEmail { get; set; }
         [Required(ErrorMessage = "Не указан пароль")]
-        public string exampleLoginPassword { get; set; }
+        public string exampleRegisterPassword { get; set; }
         [Required(ErrorMessage = "Поле повторного ввода пароля не указан")]
-        [Compare("exampleLoginPassword", ErrorMessage = "Пароли не совпадают")]
-        public string exampleReTypeLoginPassword { get; set; }
+        [Compare("exampleRegisterPassword", ErrorMessage = "Пароли не совпадают")]
+        public string exampleReTypeRegisterPassword { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

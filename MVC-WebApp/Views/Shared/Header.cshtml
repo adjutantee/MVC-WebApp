@@ -1,4 +1,5 @@
-﻿<header>
+﻿@using MVC_WebApp.db;
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVC_WebApp</a>
@@ -20,9 +21,28 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Favourite" asp-action="Index">Избранное</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                            <li class="nav-item text-dark">
+                            @User.Identity.Name
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-asp-controller="Account" asp-action="Login">Выход</a>
+                            </li>
+                    }
+                    else
+                    {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+                            </li>
+                    }
+
+                    @if (User.IsInRole(Constants.AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">Администратор</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
                     </li>

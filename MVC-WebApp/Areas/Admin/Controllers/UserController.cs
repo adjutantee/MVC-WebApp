@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.Areas.Admin.Models;
+using MVC_WebApp.db;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
-using OnlineWebApp_MVC.Controllers;
 
 namespace MVC_WebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class UserController : Controller
     {
         private readonly IUserManager userManager;
@@ -28,7 +29,7 @@ namespace MVC_WebApp.Areas.Admin.Controllers
             var userAccount = userManager.TryGetByName(name);
             return View(userAccount);
         }
-        
+
         public IActionResult ChangePassword(string name)
         {
             var changePassword = new ChangePassword()

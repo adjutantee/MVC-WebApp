@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.db;
 using MVC_WebApp.db.Models;
 using MVC_WebApp.Helpers;
 using OnlineWebApp_MVC.Models;
 using System;
-using System.Collections.Generic;
 
 namespace MVC_WebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
@@ -21,7 +22,7 @@ namespace MVC_WebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAllProduct();
-            
+
             return View(Mapping.ToProductViewModel(products));
         }
 

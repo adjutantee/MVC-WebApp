@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVC_WebApp.Areas.Admin.Models;
-using MVC_WebApp.Models;
-using MVC_WebApp.Services;
-using OnlineWebApp_MVC.Models;
+using MVC_WebApp.db;
 using OnlineWebApp_MVC.Services;
-using System;
 
 namespace MVC_WebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
         private readonly IRolesRepository rolesRepository;
@@ -20,7 +19,7 @@ namespace MVC_WebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-             var roles = rolesRepository.GetAllRole();
+            var roles = rolesRepository.GetAllRole();
             return View(roles);
         }
 

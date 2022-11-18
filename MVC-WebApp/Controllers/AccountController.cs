@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MVC_WebApp.db.Models;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
 using OnlineWebApp_MVC.Controllers;
@@ -7,63 +9,77 @@ namespace MVC_WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserManager userManager;
+        private readonly IUserManager usersManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IUserManager userManager)
+        public AccountController(IUserManager usersManager, UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.userManager = userManager;
+            this.usersManager = usersManager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
-            return View();
+            return View(new Login() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         public IActionResult Login(Login login)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Login));
+                var result = _signInManager.PasswordSignInAsync(login.exampleLoginEmail, login.exampleLoginPassword, login.exampleLoginCheckBox, false).Result;
+
+                if (result.Succeeded) return Redirect(login.ReturnUrl ?? "/Home");
+
+                else ModelState.AddModelError("", "Неправильный логин или пароль!");    
             }
 
-            var userAccount = userManager.TryGetByName(login.exampleLoginEmail);
+            return View(login);
 
-            if(userAccount == null)
-            {
-                ModelState.AddModelError("", "Такого пользователя не сущетсвует");
-                return RedirectToAction(nameof(Login));
-            }
-
-            if (userAccount.Password != login.exampleLoginPassword)
-            {
-                ModelState.AddModelError("", "Не верный логин или пароль");
-                return RedirectToAction(nameof(Login));
-            }
-
-            return RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
         }
 
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl)
         {
-            return View();
+            return View(new Register() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         public IActionResult Register(Register register)  
-        { 
+        {
+            if (register.exampleRegisterName == register.exampleRegisterPassword)
+            {
+                ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
+            }
+            
             if (ModelState.IsValid)
             {
-                userManager.Add(new UserAccount
+                User user = new User 
                 { 
-                    Name = register.exampleLoginName,
-                    NumberPhone = register.exampleLoginNumberPhone,
-                    Email = register.exampleLoginEmail,
-                    Password = register.exampleLoginPassword,
-                });
-                return RedirectToAction(nameof(HomeController.Index),"Home");
+                    Email = register.exampleRegisterEmail, 
+                    UserName = register.exampleRegisterName, 
+                    PhoneNumber = register.exampleRegisterNumberPhone 
+                };
+
+                var result = _userManager.CreateAsync(user, register.exampleRegisterPassword).Result;
+
+                if (result.Succeeded)
+                {
+                    _signInManager.SignInAsync(user, false).Wait();
+                    return Redirect(register.ReturnUrl ?? "/Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }    
+                }
             }
-            return RedirectToAction(nameof(Register));
+
+            return View(register);
         }
 
     }
