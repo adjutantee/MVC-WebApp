@@ -7,7 +7,9 @@ using MVC_WebApp.db.Models;
 using MVC_WebApp.Helpers;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
+using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace MVC_WebApp.Areas.Admin.Controllers
 {
@@ -16,10 +18,12 @@ namespace MVC_WebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -84,6 +88,35 @@ namespace MVC_WebApp.Areas.Admin.Controllers
             var user = userManager.FindByNameAsync(name).Result;
             userManager.DeleteAsync(user);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult EditRights(string name)
+        {
+            var user = userManager.FindByNameAsync(name).Result;
+            var userRoles = userManager.GetRolesAsync(user).Result;
+            var roles = roleManager.Roles.ToList();
+            var model = new EditRightsViewModel
+            {
+                UserName = user.UserName,
+                UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
+                AllRoles = roles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditRights(string userName, Dictionary<string, string> userRolesViewModel)
+        {
+            var userSelectedRoles = userRolesViewModel.Select(x => x.Key);
+
+            var user = userManager.FindByNameAsync(userName).Result;
+            var userRoles = userManager.GetRolesAsync(user).Result;
+
+            userManager.RemoveFromRolesAsync(user, userRoles).Wait();
+            userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+
+            return RedirectToAction("EditRights", new { name = userName });
         }
     }
 }

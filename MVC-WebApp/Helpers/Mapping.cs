@@ -60,7 +60,7 @@ namespace MVC_WebApp.Helpers
 
         public static UserViewModel ToUserViewModel(this User user)
         {
-            return new UserViewModel
+             return new UserViewModel
             {
                 Name = user.UserName,
                 Email = user.Email,
