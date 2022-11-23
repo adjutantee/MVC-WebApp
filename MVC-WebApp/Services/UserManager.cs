@@ -6,19 +6,19 @@ namespace MVC_WebApp.Services
 {
     public class UserManager : IUserManager
     {
-        private readonly List<UserAccount> users = new List<UserAccount>();
+        private readonly List<UserViewModel> users = new List<UserViewModel>();
 
-        public List<UserAccount> GetAllUsers()
+        public List<UserViewModel> GetAllUsers()
         {
             return users;
         }
 
-        public void Add(UserAccount user)
+        public void Add(UserViewModel user)
         {
             users.Add(user);
         }
 
-        public UserAccount TryGetByName(string name)
+        public UserViewModel TryGetByName(string name)
         {
             return users.FirstOrDefault(x => x.Name == name);
          }
@@ -29,7 +29,7 @@ namespace MVC_WebApp.Services
             account.Password = newPassword;
         }
 
-        public void UserEdit(UserAccount user)
+        public void UserEdit(UserViewModel user)
         {
             var existingUser = TryGetByName(user.Name);
             existingUser.Name = user.Name;

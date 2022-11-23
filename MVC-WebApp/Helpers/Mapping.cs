@@ -58,6 +58,16 @@ namespace MVC_WebApp.Helpers
             return cartItems;
         }
 
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                Name = user.UserName,
+                Email = user.Email,
+                NumberPhone = user.PhoneNumber
+            };
+        }
+
         public static List<OrderViewModel> ToOrderViewModels(this List<Order> orders)
         {
             var ordersViewModel = new List<OrderViewModel>();

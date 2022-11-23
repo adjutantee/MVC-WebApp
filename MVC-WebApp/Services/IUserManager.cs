@@ -5,11 +5,11 @@ namespace MVC_WebApp.Services
 {
     public interface IUserManager
     {
-        void Add(UserAccount user);
+        void Add(UserViewModel user);
         void ChangePassword(string userName, string newPassword);
-        List<UserAccount> GetAllUsers();
+        List<UserViewModel> GetAllUsers();
         void Remove(string name);
-        UserAccount TryGetByName(string name);
-        void UserEdit(UserAccount user);
+        UserViewModel TryGetByName(string name);
+        void UserEdit(UserViewModel user);
     }
 }

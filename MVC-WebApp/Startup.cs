@@ -57,8 +57,8 @@ namespace MVC_WebApp
             services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IFavouriteDbRepository, FavouriteDbRepository>();
             services.AddTransient<IOrdersRepository, OrdersDbRepository>();
-            services.AddSingleton<IRolesRepository, RolesRepository>();
-            services.AddSingleton<IUserManager, UserManager>();
+            services.AddTransient<IRolesRepository, RolesRepository>();
+            services.AddTransient<IUserManager, UserManager>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

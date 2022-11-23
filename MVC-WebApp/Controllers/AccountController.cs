@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MVC_WebApp.db;
 using MVC_WebApp.db.Models;
 using MVC_WebApp.Models;
 using MVC_WebApp.Services;
@@ -20,6 +21,18 @@ namespace MVC_WebApp.Controllers
             _signInManager = signInManager;
         }
 
+        private void TryAssignUserRole(User user)
+        {
+            try
+            {
+                _userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+            }
+            catch
+            {
+
+            }
+        }
+
         public IActionResult Login(string returnUrl)
         {
             return View(new Login() { ReturnUrl = returnUrl });
@@ -34,7 +47,7 @@ namespace MVC_WebApp.Controllers
 
                 if (result.Succeeded) return Redirect(login.ReturnUrl ?? "/Home");
 
-                else ModelState.AddModelError("", "Неправильный логин или пароль!");    
+                else ModelState.AddModelError("", "Неправильный логин или пароль!");
             }
 
             return View(login);
@@ -47,20 +60,20 @@ namespace MVC_WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Register register)  
+        public IActionResult Register(Register register)
         {
             if (register.exampleRegisterName == register.exampleRegisterPassword)
             {
                 ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
             }
-            
+
             if (ModelState.IsValid)
             {
-                User user = new User 
-                { 
-                    Email = register.exampleRegisterEmail, 
-                    UserName = register.exampleRegisterName, 
-                    PhoneNumber = register.exampleRegisterNumberPhone 
+                User user = new User
+                {
+                    Email = register.exampleRegisterEmail,
+                    UserName = register.exampleRegisterName,
+                    PhoneNumber = register.exampleRegisterNumberPhone
                 };
 
                 var result = _userManager.CreateAsync(user, register.exampleRegisterPassword).Result;
@@ -68,6 +81,7 @@ namespace MVC_WebApp.Controllers
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
+                    TryAssignUserRole(user);
                     return Redirect(register.ReturnUrl ?? "/Home");
                 }
                 else
@@ -75,11 +89,17 @@ namespace MVC_WebApp.Controllers
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
-                    }    
+                    }
                 }
             }
 
             return View(register);
+        }
+     
+        public IActionResult Logout()
+        {
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
     }

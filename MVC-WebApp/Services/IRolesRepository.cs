@@ -5,9 +5,9 @@ namespace OnlineWebApp_MVC.Services
 {
     public interface IRolesRepository
     {
-        List<Role> GetAllRole();
-        Role TryGetByName(string Name);
-        void Add(Role role);
+        List<RoleViewModel> GetAllRole();
+        RoleViewModel TryGetByName(string Name);
+        void Add(RoleViewModel role);
         void Remove(string name);
     }
 }
